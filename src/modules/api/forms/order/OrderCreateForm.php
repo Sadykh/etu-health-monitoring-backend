@@ -59,7 +59,7 @@ class OrderCreateForm extends Model
      */
     public function findOrder(User $user): ?Order
     {
-        return Order::find()->byStatusNew()->byPatient($user->id)->one();
+        return Order::find()->byStatusWorking()->byPatient($user->id)->one();
     }
 
     /**
@@ -72,6 +72,7 @@ class OrderCreateForm extends Model
         }
         $patient = Yii::$app->user->identity;
         if ($this->findOrder($patient) !== null) {
+            $this->addError('order_id', 'Order exist');
             return null;
         }
         $model = new Order();

@@ -16,6 +16,15 @@ class OrderQuery extends \yii\db\ActiveQuery
     }*/
 
     /**
+     * @param int $orderId
+     * @return $this
+     */
+    public function byId(int $orderId): self
+    {
+        return $this->andWhere(['id' => $orderId]);
+    }
+
+    /**
      * @param int $statusId
      * @return $this
      */
@@ -39,6 +48,14 @@ class OrderQuery extends \yii\db\ActiveQuery
     public function byStatusNew(): self
     {
         return $this->byStatus(Order::STATUS_NEW);
+    }
+
+    /**
+     * @return $this
+     */
+    public function byStatusWorking(): self
+    {
+        return $this->orWhere(['status_id' => Order::STATUS_NEW])->orWhere(['status_id' => Order::STATUS_TREATMENT]);
     }
 
     /**

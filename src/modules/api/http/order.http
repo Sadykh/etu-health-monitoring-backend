@@ -12,3 +12,16 @@ Authorization: Bearer {{token}}
 }
 
 ###
+
+## взять заявку
+POST {{host-url}}/order/accept
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "order_id": 1
+}
+
+###

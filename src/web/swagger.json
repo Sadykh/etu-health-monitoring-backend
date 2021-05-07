@@ -48,6 +48,44 @@
                 }
             }
         },
+        "/api/order/accept": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Accept order by doctor",
+                "description": "Method for accept order without doctor",
+                "operationId": "app\\modules\\api\\controllers\\OrderController::actionAccept",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrderAcceptForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "order_id": {
+                                            "type": "int",
+                                            "example": "5"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/user/sign-in": {
             "post": {
                 "tags": [
@@ -184,6 +222,18 @@
     },
     "components": {
         "schemas": {
+            "OrderAcceptForm": {
+                "required": [
+                    "order_id"
+                ],
+                "properties": {
+                    "order_id": {
+                        "type": "integer",
+                        "example": "100500"
+                    }
+                },
+                "type": "object"
+            },
             "OrderCreateForm": {
                 "required": [
                     "temperature",

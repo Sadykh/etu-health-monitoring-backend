@@ -124,7 +124,7 @@ class UserConfirmForm extends Model
         }
         $model = $this->findUser($this->phone);
         if ($model === null || !$model->isEqualSmsCode($this->code)) {
-            throw new Exception('Code incorrect ');
+            $this->addError('code', 'Code incorrect');
         }
         $model->generateConfirmedAt();
         if ($this->first_name) {
