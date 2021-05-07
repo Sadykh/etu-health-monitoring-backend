@@ -1,0 +1,14 @@
+# create order
+
+POST {{host-url}}/order/create
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "temperature": 36.6,
+  "symptoms": "Болит голова, живот, нога, глаза"
+}
+
+###

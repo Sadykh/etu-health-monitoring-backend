@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Exception;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
@@ -54,6 +55,16 @@ class User extends ActiveRecord implements IdentityInterface
             [['auth_key'], 'string', 'max' => 32],
             [['phone'], 'unique'],
             [['password_reset_token'], 'unique'],
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function behaviors(): array
+    {
+        return [
+            TimestampBehavior::class,
         ];
     }
 

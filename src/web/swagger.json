@@ -6,6 +6,48 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/order/create": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Create order",
+                "description": "Method for create order of treatment",
+                "operationId": "app\\modules\\api\\controllers\\OrderController::actionCreate",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrderCreateForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "temperature": {
+                                            "type": "float",
+                                            "example": "37.7"
+                                        },
+                                        "symptoms": {
+                                            "type": "text",
+                                            "example": "Болит голова, живот, нога, глаза"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/user/sign-in": {
             "post": {
                 "tags": [
@@ -142,6 +184,24 @@
     },
     "components": {
         "schemas": {
+            "OrderCreateForm": {
+                "required": [
+                    "temperature",
+                    "symptoms"
+                ],
+                "properties": {
+                    "temperature": {
+                        "type": "number",
+                        "format": "float",
+                        "example": "37.6"
+                    },
+                    "symptoms": {
+                        "type": "string",
+                        "example": "Болит голова, живот, нога, глаза"
+                    }
+                },
+                "type": "object"
+            },
             "UserConfirmForm": {
                 "required": [
                     "phone",
