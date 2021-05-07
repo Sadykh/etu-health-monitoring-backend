@@ -25,6 +25,7 @@ use yii\web\IdentityInterface;
  * @property int|null    $created_at
  * @property int|null    $updated_at
  * @property int|null    $confirmed_at
+ * @property int|null    $role_id
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -32,6 +33,12 @@ class User extends ActiveRecord implements IdentityInterface
     public const STATUS_NEW = 0;
 
     public const STATUS_ACTIVE = 1;
+
+    public const ROLE_ADMIN = 0;
+
+    public const ROLE_PATIENT = 1;
+
+    public const ROLE_DOCTOR = 2;
 
     /**
      * {@inheritdoc}
@@ -50,7 +57,8 @@ class User extends ActiveRecord implements IdentityInterface
             [['phone', 'auth_key', 'password_hash'], 'required'],
             [['birthday'], 'safe'],
             ['status_id', 'default', 'value' => self::STATUS_NEW],
-            [['status_id', 'created_at', 'updated_at', 'confirmed_at'], 'integer'],
+            ['role_id', 'default', 'value' => self::ROLE_PATIENT],
+            [['status_id', 'created_at', 'updated_at', 'confirmed_at', 'role_id'], 'integer'],
             [['phone', 'first_name', 'middle_name', 'last_name', 'gender', 'sms_code_confirm', 'password_hash', 'password_reset_token'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['phone'], 'unique'],
@@ -309,4 +317,25 @@ class User extends ActiveRecord implements IdentityInterface
         return ['user_id' => $user->id];
     }
 
+    /**
+     * @return string[]
+     */
+    public static function getRoleList(): array
+    {
+        return [
+            self::ROLE_ADMIN => 'admin',
+            self::ROLE_PATIENT => 'patient',
+            self::ROLE_DOCTOR => 'doctor',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getRoleName(): string
+    {
+        $roleList = self::getRoleList();
+
+        return $roleList[$this->role_id];
+    }
 }

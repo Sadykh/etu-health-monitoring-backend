@@ -209,6 +209,10 @@
                                         },
                                         "is_ill": {
                                             "type": "boolean"
+                                        },
+                                        "role": {
+                                            "type": "string",
+                                            "example": "admin, patient, doctor"
                                         }
                                     },
                                     "type": "object"

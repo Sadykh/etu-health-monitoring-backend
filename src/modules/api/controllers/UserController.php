@@ -123,6 +123,7 @@ class UserController extends Controller
      *              @OA\Property(property="gender", type="string"),
      *              @OA\Property(property="birthday", type="string", example="1990-12-25"),
      *              @OA\Property(property="is_ill", type="boolean"),
+     *              @OA\Property(property="role", type="string", example="admin, patient, doctor"),
      *         )
      *     ),
      * )
@@ -149,6 +150,7 @@ class UserController extends Controller
             'middle_name' => $user->middle_name,
             'gender' => $user->gender,
             'birthday' => $user->birthday,
+            'role' => $user->getRoleName(),
             'is_ill' => $order !== null,
             'doctor' => $doctor
         ];
