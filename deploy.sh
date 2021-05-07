@@ -10,6 +10,3 @@ sleep 30
 
 #./yii.sh migrate --interactive=0 --migrationPath=@yii/rbac/migrations/
 ./yii.sh migrate --interactive=0
-./yii.sh init
-
-#./yii.sh init
