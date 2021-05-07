@@ -19,7 +19,7 @@ services:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d/:rw
       - ./docker/nginx/logs:/var/log/nginx/:rw
     ports:
-      - 82:80
+      - 85:80
       - 445:443
   mariadb:
     container_name: ehm_db
