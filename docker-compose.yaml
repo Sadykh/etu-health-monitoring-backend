@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  php:
+    container_name: ehm_php
+    restart: always
+    image: sadykh/php:7.2
+    volumes:
+      - ./src:/var/www/html:rw
+      - ./db:/var/lib/mysql
+#      - ./src/supervisor.conf:/etc/supervisor/conf.d/supervisor.conf
+      - ./logs/supervisor:/var/log/supervisor
+  nginx:
+    container_name: ehm_nginx
+    restart: always
+    image: nginx:latest
+    volumes:
+      - ./src:/var/www/html:rw
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d/:rw
+      - ./docker/nginx/logs:/var/log/nginx/:rw
+    ports:
+      - 82:80
+      - 445:443
+  mariadb:
+    container_name: ehm_db
+    image: sadykh/mariadb-utf8:latest
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./db:/var/lib/mysql:rw

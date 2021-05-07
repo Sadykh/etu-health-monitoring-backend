@@ -1,0 +1,20 @@
+GET {{host-url}}/import/
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+
+
+{
+  "method": "levelrich/get_file/do_it",
+  "client": "levelrich-mobile",
+  "event": {
+    "code": "202079b8-4a3e-d902-5c8e-cc5d26bad585",
+    "time": "2019-12-17 15:56:08"
+  },
+  "data": {
+    "file_path": "my.levelrich.group/data/files/calculation/2/1912171556hRyNav99ep.json"
+  },
+  "hash": "b3df5ba92336bac8d9f26602779ee5a3"
+}
+
+###

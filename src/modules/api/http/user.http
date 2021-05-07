@@ -1,0 +1,75 @@
+GET {{host-url}}/user/
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+
+###
+
+## valid phone
+POST {{host-url}}/user/sign-in
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+
+{
+  "phone": "+79046100606"
+}
+
+###
+
+## invalid phone
+POST {{host-url}}/user/sign-in
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+
+{
+  "phone": "+7911234567"
+}
+
+###
+
+#confirm phone
+
+POST {{host-url}}/user/confirm
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+
+{
+  "phone": "+7(904)6100606",
+  "code": "2097"
+}
+
+###
+
+
+## valid phone
+POST {{host-url}}/user/confirm
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+
+{
+  "phone": "+7(904)6100606",
+  "code": "1111",
+  "first_name": "first",
+  "middle_name": "midle",
+  "last_name": "last",
+  "gender": "male",
+  "birthday": "2020-01-01"
+}
+
+> {%
+client.global.set('token', response.body.data.auth_key);
+%}
+
+
+###
+
+## get profile
+GET {{host-url}}/user/profile
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer aGkp4GDoHIhJRkGzfFh9LsBIlAja1Bi5

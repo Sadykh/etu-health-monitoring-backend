@@ -1,0 +1,3 @@
+logs/*
+conf.d/ssl.conf
+conf.d/ssl/*

@@ -1,0 +1,196 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Etu health monitoring",
+        "contact": {},
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/user/sign-in": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Sign in",
+                "description": "Method for sing in user",
+                "operationId": "app\\modules\\api\\controllers\\UserController::actionSignIn",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserSignInForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "is_exist_user": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/confirm": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Confirm",
+                "description": "Method for confirn sign in or sign up user",
+                "operationId": "app\\modules\\api\\controllers\\UserController::actionConfirm",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserConfirmForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "first_name": {
+                                            "type": "string"
+                                        },
+                                        "last_name": {
+                                            "type": "string"
+                                        },
+                                        "middle_name": {
+                                            "type": "string"
+                                        },
+                                        "gender": {
+                                            "type": "string"
+                                        },
+                                        "birthday": {
+                                            "type": "string",
+                                            "example": "1990-12-25"
+                                        },
+                                        "auth_key": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/profile": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Profile info",
+                "description": "Method for get profile info",
+                "operationId": "app\\modules\\api\\controllers\\UserController::actionProfile",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "first_name": {
+                                            "type": "string"
+                                        },
+                                        "last_name": {
+                                            "type": "string"
+                                        },
+                                        "middle_name": {
+                                            "type": "string"
+                                        },
+                                        "gender": {
+                                            "type": "string"
+                                        },
+                                        "birthday": {
+                                            "type": "string",
+                                            "example": "1990-12-25"
+                                        },
+                                        "is_ill": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UserConfirmForm": {
+                "required": [
+                    "phone",
+                    "code"
+                ],
+                "properties": {
+                    "phone": {
+                        "type": "string",
+                        "example": "+79012345678"
+                    },
+                    "code": {
+                        "type": "string",
+                        "example": "1234"
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "example": "Иван"
+                    },
+                    "middle_name": {
+                        "type": "string",
+                        "example": "Васильевич"
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "example": "Пупкин"
+                    },
+                    "gender": {
+                        "type": "string",
+                        "example": "male"
+                    },
+                    "birthday": {
+                        "type": "string",
+                        "example": "1990-12-25"
+                    }
+                },
+                "type": "object"
+            },
+            "UserSignInForm": {
+                "required": [
+                    "phone"
+                ],
+                "properties": {
+                    "phone": {
+                        "type": "string",
+                        "example": "+79012345678"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
