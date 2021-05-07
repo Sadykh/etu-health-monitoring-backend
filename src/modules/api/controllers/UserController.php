@@ -2,6 +2,7 @@
 
 namespace app\modules\api\controllers;
 
+use app\models\Order;
 use app\modules\api\components\ErrorValidationException;
 use app\modules\api\forms\user\UserConfirmForm;
 use app\modules\api\forms\user\UserSignInForm;
@@ -130,20 +131,26 @@ class UserController extends Controller
     public function actionProfile(): array
     {
         $user = Yii::$app->user->identity;
+        $doctor = null;
 
+        $order = Order::find()->byPatient($user->getId())->byStatusWorking()->one();
+        if ($order !== null) {
+            $orderDoctor = $order->doctor;
+            $doctor = [
+                'first_name' => $orderDoctor->first_name,
+                'last_name' => $orderDoctor->last_name,
+                'middle_name' => $orderDoctor->middle_name,
+                'phone' => $orderDoctor->phone,
+            ];
+        }
         return [
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'middle_name' => $user->middle_name,
             'gender' => $user->gender,
             'birthday' => $user->birthday,
-            'is_ill' => false,
-            'doctor' => [
-                'first_name' => 'Иван',
-                'last_name' => 'Прошин',
-                'middle_name' => 'Максимович',
-                'phone' => '777',
-            ],
+            'is_ill' => $order !== null,
+            'doctor' => $doctor
         ];
     }
 }
