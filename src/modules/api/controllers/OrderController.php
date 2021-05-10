@@ -82,6 +82,16 @@ class OrderController extends Controller
      *      summary="List current orders (for doctors)",
      *      tags={"Order"},
      *      description="Method for get list current orders (by doctor)",
+     *      @OA\Parameter(
+     *          name="offset",
+     *          in="query",
+     *          @OA\Schema(type="integer", example="20")
+     *      ),
+     *      @OA\Parameter(
+     *          name="limit",
+     *          in="query",
+     *          @OA\Schema(type="integer", example="20")
+     *      ),
      *      @OA\Response(
      *         response="200",
      *         description="Success",
@@ -104,6 +114,16 @@ class OrderController extends Controller
      *      summary="List discharged orders (for doctors)",
      *      tags={"Order"},
      *      description="Method for get list discharged orders (by doctor)",
+     *      @OA\Parameter(
+     *          name="offset",
+     *          in="query",
+     *          @OA\Schema(type="integer", example="20")
+     *      ),
+     *      @OA\Parameter(
+     *          name="limit",
+     *          in="query",
+     *          @OA\Schema(type="integer", example="20")
+     *      ),
      *      @OA\Response(
      *         response="200",
      *         description="Success",

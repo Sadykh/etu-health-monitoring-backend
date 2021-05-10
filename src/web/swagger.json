@@ -96,6 +96,24 @@
                 "summary": "List current orders (for doctors)",
                 "description": "Method for get list current orders (by doctor)",
                 "operationId": "app\\modules\\api\\controllers\\OrderController::actionCurrent",
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "20"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "20"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -118,6 +136,24 @@
                 "summary": "List discharged orders (for doctors)",
                 "description": "Method for get list discharged orders (by doctor)",
                 "operationId": "app\\modules\\api\\controllers\\OrderController::actionDischarged",
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "20"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "20"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -202,6 +238,310 @@
                                         "order_id": {
                                             "type": "int",
                                             "example": "5"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/task/all": {
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "List all task ",
+                "description": "Method for get list all task without pagination",
+                "operationId": "app\\modules\\api\\controllers\\TaskController::actionAll",
+                "parameters": [
+                    {
+                        "name": "order_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "100500"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "active": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TaskShortViewDto"
+                                            }
+                                        },
+                                        "done": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TaskShortViewDto"
+                                            }
+                                        },
+                                        "removed": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TaskShortViewDto"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/task/active": {
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "List active task",
+                "description": "Method for get list active task ",
+                "operationId": "app\\modules\\api\\controllers\\TaskController::actionActive",
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "20"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "20"
+                        }
+                    },
+                    {
+                        "name": "order_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "100500"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskShortViewDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/task/done": {
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "List done task",
+                "description": "Method for get list done task",
+                "operationId": "app\\modules\\api\\controllers\\TaskController::actionDone",
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "20"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "20"
+                        }
+                    },
+                    {
+                        "name": "order_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "100500"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskShortViewDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/task/removed": {
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "List active task",
+                "description": "Method for get list removed task ",
+                "operationId": "app\\modules\\api\\controllers\\TaskController::actionRemoved",
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "20"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "20"
+                        }
+                    },
+                    {
+                        "name": "order_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "100500"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskShortViewDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/task/create": {
+            "post": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Create task by order",
+                "description": "Method for create task for patient by order",
+                "operationId": "app\\modules\\api\\controllers\\TaskController::actionCreate",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TaskCreateForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskShortViewDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/task/mark-remove": {
+            "post": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Remove task for doctor role",
+                "description": "Method for remove task for doctor",
+                "operationId": "app\\modules\\api\\controllers\\TaskController::actionMarkRemove",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TaskRemoveForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "task_id": {
+                                            "type": "int",
+                                            "example": "100500"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/task/mark-done": {
+            "post": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Done task for patient role",
+                "description": "Method for mark task as done for patient",
+                "operationId": "app\\modules\\api\\controllers\\TaskController::actionMarkDone",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TaskDoneForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "task_id": {
+                                            "type": "int",
+                                            "example": "100500"
                                         }
                                     },
                                     "type": "object"
@@ -396,6 +736,39 @@
                 },
                 "type": "object"
             },
+            "TaskShortViewDto": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "100500"
+                    },
+                    "order_id": {
+                        "type": "integer",
+                        "example": "100500"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Доктор Мом",
+                        "nullable": true
+                    },
+                    "planned_at": {
+                        "type": "string",
+                        "example": "2021-05-25",
+                        "nullable": true
+                    },
+                    "done_at": {
+                        "type": "integer",
+                        "example": "2021-05-25",
+                        "nullable": true
+                    },
+                    "removed_at": {
+                        "type": "integer",
+                        "example": "2021-05-25",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "OrderAcceptForm": {
                 "required": [
                     "order_id"
@@ -422,6 +795,57 @@
                     "symptoms": {
                         "type": "string",
                         "example": "Болит голова, живот, нога, глаза"
+                    }
+                },
+                "type": "object"
+            },
+            "TaskCreateForm": {
+                "required": [
+                    "order_id",
+                    "date_to",
+                    "title",
+                    "quantity"
+                ],
+                "properties": {
+                    "order_id": {
+                        "type": "integer",
+                        "example": "100500"
+                    },
+                    "date_to": {
+                        "type": "integer",
+                        "example": "2021-05-25"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Арбидол"
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "example": "Количество"
+                    }
+                },
+                "type": "object"
+            },
+            "TaskDoneForm": {
+                "required": [
+                    "task_id"
+                ],
+                "properties": {
+                    "task_id": {
+                        "type": "integer",
+                        "example": "100500"
+                    }
+                },
+                "type": "object"
+            },
+            "TaskRemoveForm": {
+                "required": [
+                    "task_id"
+                ],
+                "properties": {
+                    "task_id": {
+                        "type": "integer",
+                        "example": "100500"
                     }
                 },
                 "type": "object"

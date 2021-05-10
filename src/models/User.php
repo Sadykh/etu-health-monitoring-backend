@@ -338,4 +338,12 @@ class User extends ActiveRecord implements IdentityInterface
 
         return $roleList[$this->role_id];
     }
+
+    /**
+     * @return bool
+     */
+    public function isRoleDoctor(): bool
+    {
+        return $this->role_id === self::ROLE_DOCTOR;
+    }
 }

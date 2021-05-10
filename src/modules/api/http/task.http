@@ -1,0 +1,56 @@
+# list tasks
+
+GET {{host-url}}/task/list?order_id=3
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+
+###
+
+# create task
+
+POST {{host-url}}/task/create
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "order_id": 3,
+  "title": "Доктор Мом",
+  "date_to": "2021-05-15",
+  "quantity": 4
+}
+
+###
+
+
+# remove task
+
+POST {{host-url}}/task/remove
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "task_id": 100
+}
+
+###
+
+# done task
+
+POST {{host-url}}/task/done
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "task_id": 103
+}
+
+###
