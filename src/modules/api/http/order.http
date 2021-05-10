@@ -21,7 +21,46 @@ Accept: application/json
 Authorization: Bearer {{token}}
 
 {
-  "order_id": 1
+  "order_id": 3
 }
+
+###
+
+## Получить все
+GET {{host-url}}/order/all
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+## Получить только новые
+GET {{host-url}}/order/new?limit=2&offset=1
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+
+
+###
+
+## Получить только свои текущие заявки
+GET {{host-url}}/order/current
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+
+###
+## Получить только свои выписанные заявки
+GET {{host-url}}/order/discharged
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
 
 ###

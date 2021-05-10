@@ -6,6 +6,132 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/order/all": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "List all types orders withoit pagination",
+                "description": "Method for get list all orders without pagination",
+                "operationId": "app\\modules\\api\\controllers\\OrderController::actionAll",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "new": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrderShortViewDto"
+                                            }
+                                        },
+                                        "current": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrderShortViewDto"
+                                            }
+                                        },
+                                        "discharged": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OrderShortViewDto"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/order/new": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "List new orders",
+                "description": "Method for get list new orders without doctor",
+                "operationId": "app\\modules\\api\\controllers\\OrderController::actionNew",
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "20"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "example": "20"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderShortViewDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/order/current": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "List current orders (for doctors)",
+                "description": "Method for get list current orders (by doctor)",
+                "operationId": "app\\modules\\api\\controllers\\OrderController::actionCurrent",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderShortViewDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/order/discharged": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "List discharged orders (for doctors)",
+                "description": "Method for get list discharged orders (by doctor)",
+                "operationId": "app\\modules\\api\\controllers\\OrderController::actionDischarged",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderShortViewDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/order/create": {
             "post": {
                 "tags": [
@@ -226,6 +352,50 @@
     },
     "components": {
         "schemas": {
+            "OrderShortViewDto": {
+                "properties": {
+                    "order_id": {
+                        "type": "integer",
+                        "example": "100500"
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "example": "Василий",
+                        "nullable": true
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "example": "Пупкин",
+                        "nullable": true
+                    },
+                    "middle_name": {
+                        "type": "string",
+                        "example": "Петрович",
+                        "nullable": true
+                    },
+                    "temperature": {
+                        "type": "number",
+                        "format": "float",
+                        "example": "36.6",
+                        "nullable": true
+                    },
+                    "symptoms": {
+                        "type": "string",
+                        "example": "Болит голова, живот, нога, глаза"
+                    },
+                    "created_at": {
+                        "type": "integer",
+                        "example": "100500",
+                        "nullable": true
+                    },
+                    "age": {
+                        "type": "integer",
+                        "example": "25",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "OrderAcceptForm": {
                 "required": [
                     "order_id"

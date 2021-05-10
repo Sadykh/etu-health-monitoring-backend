@@ -27,6 +27,8 @@ class Order extends \yii\db\ActiveRecord
 
     public const STATUS_TREATMENT = 1;
 
+    public const STATUS_DISCHARGED = 2;
+
     /**
      * {@inheritdoc}
      */

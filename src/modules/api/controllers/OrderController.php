@@ -5,13 +5,120 @@ namespace app\modules\api\controllers;
 use app\modules\api\components\ErrorValidationException;
 use app\modules\api\forms\order\OrderAcceptForm;
 use app\modules\api\forms\order\OrderCreateForm;
+use app\modules\api\search\OrderSearch;
 use Exception;
 use Yii;
 use yii\base\InvalidConfigException;
+use yii\data\ActiveDataProvider;
 use yii\rest\Controller;
 
 class OrderController extends Controller
 {
+
+    /**
+     * @return array
+     * @OA\Get(
+     *      path="/api/order/all",
+     *      summary="List all types orders withoit pagination",
+     *      tags={"Order"},
+     *      description="Method for get list all orders without pagination",
+     *      @OA\Response(
+     *         response="200",
+     *         description="Success",
+     *         @OA\JsonContent(
+     *              @OA\Property(property="new", type="array", @OA\Items(ref="#/components/schemas/OrderShortViewDto")),
+     *              @OA\Property(property="current", type="array", @OA\Items(ref="#/components/schemas/OrderShortViewDto")),
+     *              @OA\Property(property="discharged", type="array", @OA\Items(ref="#/components/schemas/OrderShortViewDto")),
+     *         )
+     *     ),
+     * )
+     * @throws Exception
+     */
+    public function actionAll(): array
+    {
+        return [
+            'new' => (new OrderSearch())->search([], true, false, false),
+            'current' => (new OrderSearch())->search([], false, true, false),
+            'discharged' => (new OrderSearch())->search([], false, false, true),
+        ];
+    }
+
+    /**
+     * @return ActiveDataProvider
+     * @OA\Get(
+     *      path="/api/order/new",
+     *      summary="List new orders",
+     *      tags={"Order"},
+     *      description="Method for get list new orders without doctor",
+     *      @OA\Parameter(
+     *          name="offset",
+     *          in="query",
+     *          @OA\Schema(type="integer", example="20")
+     *      ),
+     *      @OA\Parameter(
+     *          name="limit",
+     *          in="query",
+     *          @OA\Schema(type="integer", example="20")
+     *      ),
+     *      @OA\Response(
+     *         response="200",
+     *         description="Success",
+     *         @OA\JsonContent(ref="#/components/schemas/OrderShortViewDto"),
+     *     ),
+     * )
+     * @throws Exception
+     */
+    public function actionNew(): ActiveDataProvider
+    {
+        $search = new OrderSearch();
+
+        return $search->search(Yii::$app->request->queryParams, true, false, false);
+    }
+
+    /**
+     * @return ActiveDataProvider
+     * @OA\Get(
+     *      path="/api/order/current",
+     *      summary="List current orders (for doctors)",
+     *      tags={"Order"},
+     *      description="Method for get list current orders (by doctor)",
+     *      @OA\Response(
+     *         response="200",
+     *         description="Success",
+     *         @OA\JsonContent(ref="#/components/schemas/OrderShortViewDto"),
+     *     ),
+     * )
+     * @throws Exception
+     */
+    public function actionCurrent(): ActiveDataProvider
+    {
+        $search = new OrderSearch();
+
+        return $search->search(Yii::$app->request->queryParams, false, true, false);
+    }
+
+    /**
+     * @return ActiveDataProvider
+     * @OA\Get(
+     *      path="/api/order/discharged",
+     *      summary="List discharged orders (for doctors)",
+     *      tags={"Order"},
+     *      description="Method for get list discharged orders (by doctor)",
+     *      @OA\Response(
+     *         response="200",
+     *         description="Success",
+     *         @OA\JsonContent(ref="#/components/schemas/OrderShortViewDto"),
+     *     ),
+     * )
+     * @throws Exception
+     */
+    public function actionDischarged(): ActiveDataProvider
+    {
+        $search = new OrderSearch();
+
+        return $search->search(Yii::$app->request->queryParams, false, false, true);
+    }
+
     /**
      * @OA\Post(
      *      path="/api/order/create",
@@ -75,7 +182,7 @@ class OrderController extends Controller
      * @throws InvalidConfigException
      * @throws Exception
      */
-    public function actionAccept()
+    public function actionAccept(): array
     {
         $data = Yii::$app->request->getBodyParams();
         $model = new OrderAcceptForm();
