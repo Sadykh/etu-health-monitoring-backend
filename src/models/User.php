@@ -26,6 +26,7 @@ use yii\web\IdentityInterface;
  * @property int|null    $updated_at
  * @property int|null    $confirmed_at
  * @property int|null    $role_id
+ * @property string|null $firebase_token
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -59,7 +60,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['status_id', 'default', 'value' => self::STATUS_NEW],
             ['role_id', 'default', 'value' => self::ROLE_PATIENT],
             [['status_id', 'created_at', 'updated_at', 'confirmed_at', 'role_id'], 'integer'],
-            [['phone', 'first_name', 'middle_name', 'last_name', 'gender', 'sms_code_confirm', 'password_hash', 'password_reset_token'], 'string', 'max' => 255],
+            [['phone', 'first_name', 'middle_name', 'last_name', 'gender', 'sms_code_confirm', 'password_hash', 'password_reset_token', 'firebase_token'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['phone'], 'unique'],
             [['password_reset_token'], 'unique'],
@@ -96,6 +97,7 @@ class User extends ActiveRecord implements IdentityInterface
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'confirmed_at' => 'Confirmed At',
+            'firebase_token' => 'Firebase token',
         ];
     }
 

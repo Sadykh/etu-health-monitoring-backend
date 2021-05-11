@@ -688,6 +688,43 @@
                     }
                 }
             }
+        },
+        "/api/user/firebase": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Firebase",
+                "description": "Method for set firebase token for user",
+                "operationId": "app\\modules\\api\\controllers\\UserController::actionFirebase",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserFirebaseTokenForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "firebase_token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -883,6 +920,18 @@
                     "birthday": {
                         "type": "string",
                         "example": "1990-12-25"
+                    }
+                },
+                "type": "object"
+            },
+            "UserFirebaseTokenForm": {
+                "required": [
+                    "firebase_token"
+                ],
+                "properties": {
+                    "firebase_token": {
+                        "type": "string",
+                        "example": "asdasdq4124afasd"
                     }
                 },
                 "type": "object"

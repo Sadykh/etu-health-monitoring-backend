@@ -73,3 +73,16 @@ Cache-Control: no-cache
 Content-Type: application/json
 Accept: application/json
 Authorization: Bearer {{token}}
+
+###
+
+## set firebase token
+POST {{host-url}}/user/firebase
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "firebase_token": "asdasdasds"
+}

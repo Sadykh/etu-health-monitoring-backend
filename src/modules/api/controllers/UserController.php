@@ -5,10 +5,10 @@ namespace app\modules\api\controllers;
 use app\models\Order;
 use app\modules\api\components\ErrorValidationException;
 use app\modules\api\forms\user\UserConfirmForm;
+use app\modules\api\forms\user\UserFirebaseTokenForm;
 use app\modules\api\forms\user\UserSignInForm;
 use Exception;
 use Yii;
-use yii\base\BaseObject;
 use yii\base\InvalidConfigException;
 use yii\rest\Controller;
 
@@ -153,6 +153,46 @@ class UserController extends Controller
             'role' => $user->getRoleName(),
             'is_ill' => $order !== null,
             'doctor' => $doctor
+        ];
+    }
+
+    /**
+     * @throws ErrorValidationException
+     * @throws InvalidConfigException
+     * @throws Exception
+     *
+     * @OA\Post(
+     *      path="/api/user/firebase",
+     *      summary="Firebase",
+     *      tags={"User"},
+     *      description="Method for set firebase token for user",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/UserFirebaseTokenForm"),
+     *      ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Success",
+     *         @OA\JsonContent(
+     *              @OA\Property(property="firebase_token", type="string"),
+     *         )
+     *     ),
+     * )
+     */
+    public function actionFirebase(): array
+    {
+        $data = Yii::$app->request->getBodyParams();
+
+        $model = new UserFirebaseTokenForm();
+        $model->load($data);
+
+        $user = $model->save();
+        if ($user === null) {
+            throw new ErrorValidationException($model->getFirstErrors());
+        }
+
+        return [
+            'firebase_token' => $user->firebase_token,
         ];
     }
 }
