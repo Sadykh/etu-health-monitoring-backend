@@ -683,6 +683,30 @@
                                         "role": {
                                             "type": "string",
                                             "example": "admin, patient, doctor"
+                                        },
+                                        "doctor": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "example": "Иван"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "example": "Пупкин"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string",
+                                                        "example": "Васильевич"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string",
+                                                        "example": "+79012345678"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"

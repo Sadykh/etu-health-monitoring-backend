@@ -126,6 +126,14 @@ class UserController extends Controller
      *              @OA\Property(property="birthday", type="string", example="1990-12-25"),
      *              @OA\Property(property="is_ill", type="boolean"),
      *              @OA\Property(property="role", type="string", example="admin, patient, doctor"),
+     *              @OA\Property(property="doctor", type="array",
+     *                   @OA\Items(
+     *                      @OA\Property(property="first_name", type="string", example="Иван"),
+     *                      @OA\Property(property="last_name", type="string", example="Пупкин"),
+     *                      @OA\Property(property="middle_name", type="string", example="Васильевич"),
+     *                      @OA\Property(property="phone", type="string", example="+79012345678"),
+     *                   )
+     *              ),
      *         )
      *     ),
      * )
@@ -134,8 +142,12 @@ class UserController extends Controller
     public function actionProfile(): array
     {
         $user = Yii::$app->user->identity;
-        $doctor = null;
-
+        $doctor = [
+            'first_name' => null,
+            'last_name' => null,
+            'middle_name' => null,
+            'phone' => null,
+        ];
         $order = Order::find()->byPatient($user->getId())->byStatusWorking()->one();
         if ($order !== null) {
             $orderDoctor = $order->doctor;
