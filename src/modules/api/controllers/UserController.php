@@ -80,6 +80,7 @@ class UserController extends Controller
      *              @OA\Property(property="gender", type="string"),
      *              @OA\Property(property="birthday", type="string", example="1990-12-25"),
      *              @OA\Property(property="auth_key", type="string"),
+     *              @OA\Property(property="role", type="string", example="admin, patient, doctor"),
      *         )
      *     ),
      * )
@@ -103,6 +104,7 @@ class UserController extends Controller
             'gender' => $user->gender,
             'birthday' => $user->birthday,
             'auth_key' => $user->auth_key,
+            'role' => $user->getRoleName(),
         ];
     }
 
