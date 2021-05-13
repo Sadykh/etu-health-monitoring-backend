@@ -142,12 +142,7 @@ class UserController extends Controller
     public function actionProfile(): array
     {
         $user = Yii::$app->user->identity;
-        $doctor = [
-            'first_name' => null,
-            'last_name' => null,
-            'middle_name' => null,
-            'phone' => null,
-        ];
+        $doctor = null;
         $order = Order::find()->byPatient($user->getId())->byStatusWorking()->one();
         if ($order !== null) {
             $orderDoctor = $order->doctor;
