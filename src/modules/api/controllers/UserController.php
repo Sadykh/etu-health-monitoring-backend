@@ -144,7 +144,7 @@ class UserController extends Controller
         $user = Yii::$app->user->identity;
         $doctor = null;
         $order = Order::find()->byPatient($user->getId())->byStatusWorking()->one();
-        if ($order !== null) {
+        if ($order !== null &&  $order->doctor !== null) {
             $orderDoctor = $order->doctor;
             $doctor = [
                 'first_name' => $orderDoctor->first_name,
