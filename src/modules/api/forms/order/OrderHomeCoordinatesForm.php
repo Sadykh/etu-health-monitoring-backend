@@ -37,7 +37,7 @@ class OrderHomeCoordinatesForm extends Model
     /**
      * @var int
      * @OA\Property(
-     *     example="59.971920"
+     *     example=59.971920
      * )
      */
     public $latitude;
@@ -45,7 +45,7 @@ class OrderHomeCoordinatesForm extends Model
     /**
      * @var int
      * @OA\Property(
-     *     example="30.324516"
+     *     example=30.324516
      * )
      */
     public $longitude;

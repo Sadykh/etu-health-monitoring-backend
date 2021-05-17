@@ -235,8 +235,8 @@ class OrderController extends Controller
      *         @OA\JsonContent(
      *              @OA\Property(property="order_id", type="int", example="5"),
      *              @OA\Property(property="point", type="array", @OA\Items(
-     *                  @OA\Property(property="latitude", type="int", example="-45.62390335574153"),
-     *                  @OA\Property(property="longitude", type="int", example="-3.9551761173743847"),
+     *                  @OA\Property(property="latitude", type="integer", example=-45.62390335574153),
+     *                  @OA\Property(property="longitude", type="integer", example=-3.9551761173743847),
      *              )),
      *         )
      *     ),

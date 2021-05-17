@@ -282,12 +282,12 @@
                                             "items": {
                                                 "properties": {
                                                     "latitude": {
-                                                        "type": "int",
-                                                        "example": "-45.62390335574153"
+                                                        "type": "integer",
+                                                        "example": -45.62390335574153
                                                     },
                                                     "longitude": {
-                                                        "type": "int",
-                                                        "example": "-3.9551761173743847"
+                                                        "type": "integer",
+                                                        "example": -3.9551761173743847
                                                     }
                                                 },
                                                 "type": "object"
@@ -935,11 +935,11 @@
                     },
                     "latitude": {
                         "type": "integer",
-                        "example": "59.971920"
+                        "example": 59.97192
                     },
                     "longitude": {
                         "type": "integer",
-                        "example": "30.324516"
+                        "example": 30.324516
                     }
                 },
                 "type": "object"
