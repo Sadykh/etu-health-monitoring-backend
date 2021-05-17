@@ -70,15 +70,16 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'patient_id' => 'Patient ID',
-            'doctor_id' => 'Doctor ID',
-            'status_id' => 'Status ID',
-            'temperature' => 'Temperature',
-            'symptoms' => 'Symptoms',
+            'patient_id' => 'Пациент',
+            'doctor_id' => 'Врач',
+            'status_id' => 'Статус',
+            'statusRuName' => 'Статус',
+            'temperature' => 'Температура, С',
+            'symptoms' => 'Симптомы',
             'home_coordinate' => 'Home Coordinate',
-            'discharged_at' => 'Discharged At',
-            'doctor_attempted_at' => 'Doctor Attempted At',
-            'created_at' => 'Created At',
+            'discharged_at' => 'Выписан',
+            'doctor_attempted_at' => 'Доктор назначен',
+            'created_at' => 'Создана',
             'updated_at' => 'Updated At',
         ];
     }
@@ -129,5 +130,40 @@ class Order extends \yii\db\ActiveRecord
     {
         $list = self::getStatusList();
         return $list[$this->status_id];
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getStatusRuList(): array
+    {
+        return [
+            self::STATUS_NEW => 'Новый',
+            self::STATUS_TREATMENT => 'На лечении',
+            self::STATUS_DISCHARGED => 'Выписан',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusRuName(): string
+    {
+        $list = self::getStatusRuList();
+        return $list[$this->status_id];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStatusNew(): bool {
+        return $this->status_id === self::STATUS_NEW;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStatusDischarged(): bool {
+        return $this->status_id === self::STATUS_DISCHARGED;
     }
 }
