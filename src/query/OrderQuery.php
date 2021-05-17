@@ -64,7 +64,9 @@ class OrderQuery extends \yii\db\ActiveQuery
      */
     public function byStatusWorking(): self
     {
-        return $this->orWhere(['status_id' => Order::STATUS_NEW])->orWhere(['status_id' => Order::STATUS_TREATMENT]);
+        return $this->andFilterWhere(['or',
+            ['=', 'status_id', Order::STATUS_NEW],
+            ['=', 'status_id', Order::STATUS_TREATMENT]]);
     }
 
     /**

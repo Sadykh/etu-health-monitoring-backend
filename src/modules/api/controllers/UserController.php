@@ -161,7 +161,8 @@ class UserController extends Controller
             'birthday' => $user->birthday,
             'role' => $user->getRoleName(),
             'is_ill' => $order !== null,
-            'doctor' => $doctor
+            'doctor' => $doctor,
+            'order_id' => $order->id ?? null
         ];
     }
 
