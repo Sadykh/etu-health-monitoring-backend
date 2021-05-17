@@ -63,7 +63,7 @@ class TaskRemoveForm extends Model
         if (!$this->validate()) {
             return false;
         }
-        $task = $this->findTask($this->task_id, Yii::$app->user);
+        $task = $this->findTask($this->task_id, Yii::$app->user->identity);
 
         if ($task === null) {
             $this->addError('task_id', 'Task not found');
