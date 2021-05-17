@@ -84,20 +84,24 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'phone' => 'Phone',
-            'first_name' => 'First Name',
-            'last_name' => 'Last Name',
-            'gender' => 'Gender',
-            'birthday' => 'Birthday',
-            'sms_code_confirm' => 'Sms Code Confirm',
+            'phone' => 'Телефон',
+            'first_name' => 'Имя',
+            'last_name' => 'Фамилия',
+            'gender' => 'Пол',
+            'genderRuName' => 'Пол',
+            'birthday' => 'День Рождения',
+            'sms_code_confirm' => 'SMS код',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',
             'password_reset_token' => 'Password Reset Token',
-            'status_id' => 'Status ID',
+            'status_id' => 'Статус',
+            'statusRuName' => 'Статус',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'confirmed_at' => 'Confirmed At',
             'firebase_token' => 'Firebase token',
+            'roleName' => 'Роль',
+            'roleRuName' => 'Роль',
         ];
     }
 
@@ -341,6 +345,33 @@ class User extends ActiveRecord implements IdentityInterface
         return $roleList[$this->role_id];
     }
 
+    public static function getRoleRussianList(): array
+    {
+        return [
+            self::ROLE_ADMIN => 'Администратор',
+            self::ROLE_PATIENT => 'Пациент',
+            self::ROLE_DOCTOR => 'Доктор',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getRoleRuName(): string
+    {
+        $roleList = self::getRoleRussianList();
+
+        return $roleList[$this->role_id];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRoleAdmin(): bool
+    {
+        return $this->role_id === self::ROLE_ADMIN;
+    }
+
     /**
      * @return bool
      */
@@ -348,4 +379,37 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->role_id === self::ROLE_DOCTOR;
     }
+
+    /**
+     * @return string
+     */
+    public function getGenderRuName(): string
+    {
+        if ($this->gender === 'mail') {
+            return 'Мужчина';
+        }
+
+        return 'Женщина';
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getStatusRuList(): array
+    {
+        return [
+            self::STATUS_NEW => 'Новый',
+            self::STATUS_ACTIVE => 'Активный',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusRuName(): string
+    {
+        return self::getStatusRuList()[$this->status_id];
+    }
+
+
 }
