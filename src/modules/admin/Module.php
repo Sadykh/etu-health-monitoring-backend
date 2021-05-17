@@ -12,13 +12,14 @@ class Module extends \yii\base\Module
      */
     public $controllerNamespace = 'app\modules\admin\controllers';
 
+    public $layout = 'main';
+
     /**
      * {@inheritdoc}
      */
     public function init()
     {
         parent::init();
-
         // custom initialization code goes here
     }
 }
