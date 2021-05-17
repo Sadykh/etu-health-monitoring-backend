@@ -788,6 +788,10 @@
                         "type": "string",
                         "example": "Болит голова, живот, нога, глаза"
                     },
+                    "status": {
+                        "type": "string",
+                        "example": "new, treatment, discharged"
+                    },
                     "created_at": {
                         "type": "integer",
                         "example": "100500",

@@ -68,6 +68,15 @@ class OrderShortViewDto
     public $symptoms;
 
     /**
+     * @var string
+     * @OA\Property(
+     *     example="new, treatment, discharged"
+     * )
+     *
+     */
+    public $status;
+
+    /**
      * @var int|null
      * @OA\Property(
      *     example="100500"
@@ -114,6 +123,7 @@ class OrderShortViewDto
         $this->temperature = $order->temperature;
         $this->symptoms = $order->symptoms;
         $this->created_at = $order->created_at;
+        $this->status = $order->getStatusName();
         $this->age = $this->calculateAge($patient->birthday);
     }
 }

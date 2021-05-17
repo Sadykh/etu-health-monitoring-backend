@@ -109,4 +109,25 @@ class Order extends \yii\db\ActiveRecord
     {
         return new \app\query\OrderQuery(get_called_class());
     }
+
+    /**
+     * @return string[]
+     */
+    public static function getStatusList(): array
+    {
+        return [
+            self::STATUS_NEW => 'new',
+            self::STATUS_TREATMENT => 'treatment',
+            self::STATUS_DISCHARGED => 'discharged',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusName(): string
+    {
+        $list = self::getStatusList();
+        return $list[$this->status_id];
+    }
 }
