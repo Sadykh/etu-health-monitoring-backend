@@ -59,7 +59,7 @@ class OrderSearch extends Order
         if ($onlyNew) {
             $query->byStatusNew();
         } else if ($onlyWorking) {
-            $query->byStatusWorking();
+            $query->byStatusTreatment();
         } else if ($onlyDischarged) {
             $query->byStatusDischarged();
         }

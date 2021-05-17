@@ -70,6 +70,14 @@ class OrderQuery extends \yii\db\ActiveQuery
     /**
      * @return $this
      */
+    public function byStatusTreatment(): self
+    {
+        return $this->andWhere(['status_id' => Order::STATUS_TREATMENT]);
+    }
+
+    /**
+     * @return $this
+     */
     public function byStatusDischarged(): self
     {
         return $this->byStatus(Order::STATUS_DISCHARGED);

@@ -84,7 +84,7 @@ class TaskCreateForm extends Model
      */
     public function findOrder(int $orderId, User $doctor): ?Order
     {
-        return Order::find()->byId($orderId)->byStatusWorking()->byDoctor($doctor->id)->one();
+        return Order::find()->byId($orderId)->byStatusTreatment()->byDoctor($doctor->id)->one();
     }
 
     public function create(): array
