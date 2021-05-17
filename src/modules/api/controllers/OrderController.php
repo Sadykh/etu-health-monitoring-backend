@@ -5,6 +5,7 @@ namespace app\modules\api\controllers;
 use app\modules\api\components\ErrorValidationException;
 use app\modules\api\forms\order\OrderAcceptForm;
 use app\modules\api\forms\order\OrderCreateForm;
+use app\modules\api\forms\order\OrderHomeCoordinatesForm;
 use app\modules\api\search\OrderSearch;
 use Exception;
 use Yii;
@@ -215,6 +216,49 @@ class OrderController extends Controller
 
         return [
             'order_id' => $order->id,
+        ];
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/order/home-coordinates",
+     *      summary="Set home coordinates order by doctor",
+     *      tags={"Order"},
+     *      description="Method for set home coordinates",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/OrderHomeCoordinatesForm"),
+     *      ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Success",
+     *         @OA\JsonContent(
+     *              @OA\Property(property="order_id", type="int", example="5"),
+     *              @OA\Property(property="point", type="array", @OA\Items(
+     *                  @OA\Property(property="latitude", type="int", example="-45.62390335574153"),
+     *                  @OA\Property(property="longitude", type="int", example="-3.9551761173743847"),
+     *              )),
+     *         )
+     *     ),
+     * )
+     * @throws ErrorValidationException
+     * @throws InvalidConfigException
+     * @throws Exception
+     */
+    public function actionHomeCoordinates(): array
+    {
+        $data = Yii::$app->request->getBodyParams();
+        $model = new OrderHomeCoordinatesForm();
+        $model->load($data);
+
+        $order = $model->save();
+        if ($order === null) {
+            throw new ErrorValidationException($model->getFirstErrors());
+        }
+
+        return [
+            'order_id' => $order->id,
+            'point' => $order->getNormalHomeCoordinates(),
         ];
     }
 

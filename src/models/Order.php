@@ -166,4 +166,17 @@ class Order extends \yii\db\ActiveRecord
     public function isStatusDischarged(): bool {
         return $this->status_id === self::STATUS_DISCHARGED;
     }
+
+    public function getNormalHomeCoordinates(): ?array {
+        if ($this->home_coordinate === null) {
+            return null;
+        };
+
+        $coordinates = unpack('x/x/x/x/corder/Ltype/dlat/dlon', $this->home_coordinate);
+
+        return [
+            'latitude' => $coordinates['lat'],
+            'longitude' => $coordinates['lon']
+        ];
+    }
 }

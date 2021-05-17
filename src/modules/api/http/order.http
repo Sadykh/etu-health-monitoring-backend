@@ -64,3 +64,17 @@ Authorization: Bearer {{token}}
 
 
 ###
+
+
+## установить домашнюю локацию
+POST {{host-url}}/order/home-coordinates
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "order_id": 3,
+  "latitude": -45.62390335574153,
+  "longitude": -3.9551761173743847
+}

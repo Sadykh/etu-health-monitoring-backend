@@ -248,6 +248,60 @@
                 }
             }
         },
+        "/api/order/home-coordinates": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Set home coordinates order by doctor",
+                "description": "Method for set home coordinates",
+                "operationId": "app\\modules\\api\\controllers\\OrderController::actionHomeCoordinates",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrderHomeCoordinatesForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "order_id": {
+                                            "type": "int",
+                                            "example": "5"
+                                        },
+                                        "point": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "latitude": {
+                                                        "type": "int",
+                                                        "example": "-45.62390335574153"
+                                                    },
+                                                    "longitude": {
+                                                        "type": "int",
+                                                        "example": "-3.9551761173743847"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/task/all": {
             "get": {
                 "tags": [
@@ -864,6 +918,28 @@
                     "symptoms": {
                         "type": "string",
                         "example": "Болит голова, живот, нога, глаза"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderHomeCoordinatesForm": {
+                "required": [
+                    "order_id",
+                    "latitude",
+                    "longitude"
+                ],
+                "properties": {
+                    "order_id": {
+                        "type": "integer",
+                        "example": "100500"
+                    },
+                    "latitude": {
+                        "type": "integer",
+                        "example": "59.971920"
+                    },
+                    "longitude": {
+                        "type": "integer",
+                        "example": "30.324516"
                     }
                 },
                 "type": "object"
