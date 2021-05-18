@@ -855,6 +855,18 @@
                         "type": "integer",
                         "example": "25",
                         "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "format": "double",
+                        "example": -45.62390335574153,
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "format": "double",
+                        "example": -3.9551761173743847,
+                        "nullable": true
                     }
                 },
                 "type": "object"

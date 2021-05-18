@@ -95,6 +95,24 @@ class OrderShortViewDto
     public $age;
 
     /**
+     * @var double|null
+     * @OA\Property(
+     *     example=-45.62390335574153
+     * )
+     *
+     */
+    public $latitude;
+
+    /**
+     * @var double|null
+     * @OA\Property(
+     *     example=-3.9551761173743847
+     * )
+     *
+     */
+    public $longitude;
+
+    /**
      * @throws Exception
      */
     public function calculateAge(?string $birthday): ?int
@@ -125,5 +143,12 @@ class OrderShortViewDto
         $this->created_at = $order->created_at;
         $this->status = $order->getStatusName();
         $this->age = $this->calculateAge($patient->birthday);
+
+        $point = $order->getNormalHomeCoordinates();
+
+        if ($point !== null) {
+            $this->latitude = $point['latitude'];
+            $this->longitude = $point['longitude'];
+        }
     }
 }
