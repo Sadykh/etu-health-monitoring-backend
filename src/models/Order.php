@@ -45,11 +45,16 @@ class Order extends \yii\db\ActiveRecord
         return [
             ['status_id', 'default', 'value' => self::STATUS_NEW],
             [['patient_id', 'symptoms'], 'required'],
-            [['patient_id', 'doctor_id', 'status_id', 'discharged_at', 'doctor_attempted_at', 'created_at', 'updated_at'], 'integer'],
+            [['patient_id', 'doctor_id', 'status_id', 'discharged_at',
+                'doctor_attempted_at', 'created_at', 'updated_at'], 'integer'],
             [['temperature'], 'number'],
             [['symptoms', 'home_coordinate'], 'string'],
-            [['doctor_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['doctor_id' => 'id']],
-            [['patient_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['patient_id' => 'id']],
+            [['doctor_id'], 'exist', 'skipOnError' => true,
+                'targetClass' => User::className(),
+                'targetAttribute' => ['doctor_id' => 'id']],
+            [['patient_id'], 'exist', 'skipOnError' => true,
+                'targetClass' => User::className(),
+                'targetAttribute' => ['patient_id' => 'id']],
         ];
     }
 
@@ -90,7 +95,8 @@ class Order extends \yii\db\ActiveRecord
      */
     public function getDoctor()
     {
-        return $this->hasOne(User::className(), ['id' => 'doctor_id']);
+        return $this
+            ->hasOne(User::className(), ['id' => 'doctor_id']);
     }
 
     /**
@@ -99,12 +105,12 @@ class Order extends \yii\db\ActiveRecord
      */
     public function getPatient()
     {
-        return $this->hasOne(User::className(), ['id' => 'patient_id']);
+        return $this
+            ->hasOne(User::className(), ['id' => 'patient_id']);
     }
 
     /**
-     * {@inheritdoc}
-     * @return \app\query\OrderQuery the active query used by this AR class.
+     * @return \app\query\OrderQuery
      */
     public static function find()
     {
@@ -129,6 +135,7 @@ class Order extends \yii\db\ActiveRecord
     public function getStatusName(): string
     {
         $list = self::getStatusList();
+
         return $list[$this->status_id];
     }
 
@@ -150,33 +157,40 @@ class Order extends \yii\db\ActiveRecord
     public function getStatusRuName(): string
     {
         $list = self::getStatusRuList();
+
         return $list[$this->status_id];
     }
 
     /**
      * @return bool
      */
-    public function isStatusNew(): bool {
+    public function isStatusNew(): bool
+    {
         return $this->status_id === self::STATUS_NEW;
     }
 
     /**
      * @return bool
      */
-    public function isStatusDischarged(): bool {
+    public function isStatusDischarged(): bool
+    {
         return $this->status_id === self::STATUS_DISCHARGED;
     }
 
-    public function getNormalHomeCoordinates(): ?array {
+    public function getNormalHomeCoordinates(): ?array
+    {
         if ($this->home_coordinate === null) {
             return null;
         }
 
-        $coordinates = unpack('x/x/x/x/corder/Ltype/dlat/dlon', $this->home_coordinate);
+        $coordinates = unpack(
+            'x/x/x/x/corder/Ltype/dlat/dlon',
+            $this->home_coordinate
+        );
 
         return [
             'latitude' => $coordinates['lat'],
-            'longitude' => $coordinates['lon']
+            'longitude' => $coordinates['lon'],
         ];
     }
 }
