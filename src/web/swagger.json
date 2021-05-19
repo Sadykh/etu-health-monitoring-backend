@@ -807,6 +807,36 @@
                     }
                 }
             }
+        },
+        "/api/user/coordinate": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Coordinate",
+                "description": "Method for set coordinate for user",
+                "operationId": "app\\modules\\api\\controllers\\UserController::actionCoordinate",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserCoordinateForm"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -1040,6 +1070,23 @@
                     "birthday": {
                         "type": "string",
                         "example": "1990-12-25"
+                    }
+                },
+                "type": "object"
+            },
+            "UserCoordinateForm": {
+                "required": [
+                    "latitude",
+                    "longitude"
+                ],
+                "properties": {
+                    "latitude": {
+                        "type": "integer",
+                        "example": 59.97192
+                    },
+                    "longitude": {
+                        "type": "integer",
+                        "example": 30.324516
                     }
                 },
                 "type": "object"

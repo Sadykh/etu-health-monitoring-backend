@@ -86,3 +86,16 @@ Authorization: Bearer {{token}}
 {
   "firebase_token": "asdasdasds"
 }
+
+###
+## set coordinate
+POST {{host-url}}/user/coordinate
+Cache-Control: no-cache
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "latitude": -45.62390335574153,
+  "longitude": -3.9551761173743847
+}
